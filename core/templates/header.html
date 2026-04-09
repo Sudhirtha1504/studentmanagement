@@ -1,0 +1,82 @@
+{% load static %}
+
+<div class="top-bar">
+    Comprehensive student management system
+</div>
+
+<nav class="navbar">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}">
+        <span>EduManage</span>
+    </div>
+
+    <!-- Menu -->
+    <ul class="nav-links">
+        <li>
+            <a href="{% url 'home' %}"
+               class="{% if request.path == '/' %}active{% endif %}">
+               Home
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'dashboard' %}"
+               class="{% if 'dashboard' in request.path %}active{% endif %}">
+               Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'course' %}"
+               class="{% if 'course' in request.path %}active{% endif %}">
+               Course
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'sessions' %}"
+               class="{% if 'sessions' in request.path %}active{% endif %}">
+               Sessions
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'events' %}"
+               class="{% if 'events' in request.path %}active{% endif %}">
+               Events
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'contact' %}"
+               class="{% if 'contact' in request.path %}active{% endif %}">
+               Contact Us
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'about' %}"
+               class="{% if 'about' in request.path %}active{% endif %}">
+               About Us
+            </a>
+        </li>
+    </ul>
+
+    <!-- Right -->
+    <div class="nav-right">
+
+        <span class="icon">🔔</span>
+        <span class="icon"><a href="{% url 'contact' %}">🎧</a></span>
+
+        <!-- PROFILE -->
+        <div class="profile">
+    <button id="userBtn" onclick="handleUserClick()">
+        <span id="userText">Register Free</span>
+    </button>
+</div>
+
+    </div>
+   
+</nav>

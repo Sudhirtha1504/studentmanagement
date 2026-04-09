@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+
+    <div class="hero-top">
+        <h1>The #1 Platform for Modern Schools</h1>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search Information">
+        </div>
+    </div>
+
+    <div class="hero-content">
+
+        <!-- LEFT -->
+        <div class="hero-text">
+            <h2>Streamline Your School Management</h2>
+
+            <p>
+                EduManage provides an all-in-one solution to manage student data,
+                track academic progress, and improve communication.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'dashboard' %}">
+                    <button class="btn-primary">Go to Dashboard Now</button></a>
+                   <a href="{% url 'contact' %}"><button class="btn-primary">Enquire Now</button></a>
+                
+            </div>
+        </div>
+
+        <!-- RIGHT (IMAGE SLIDER) -->
+        <div class="hero-image">
+            <img id="hero-img" src="{% static 'images/hero1.jpg' %}" alt="hero">
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= WAVE ================= -->
+<div class="wave"></div>
+
+<!-- ================= FEATURES ================= -->
+<section class="features">
+    <h2>Powerful Features</h2>
+    <p>Everything you need to manage your institution</p>
+
+    <div class="feature-grid">
+        {% for f in features %}
+        <div class="card">
+            <h3>{{ f.title }}</h3>
+            <p>{{ f.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats">
+    <div class="overlay">
+        {% for s in stats %}
+        <div class="stat-box">
+            <h2>{{ s.value }}</h2>
+            <p>{{ s.title }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="testimonials">
+    <h2>What Our Users Say</h2>
+
+    <div class="testimonial-grid">
+        {% for t in testimonials %}
+        <div class="testimonial">
+            <p>"{{ t.message }}"</p>
+            <h4>{{ t.name }}</h4>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+    <h2>Ready to Transform Your Institution?</h2>
+    <p>Join thousands of schools using EduManage</p>
+
+    <button class="btn-white">Get Started</button>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+    <h2>FAQ</h2>
+
+    {% for f in faqs %}
+    <div class="faq-item">
+        <h3>{{ f.question }}</h3>
+        <p>{{ f.answer }}</p>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- ================= HERO SLIDER SCRIPT ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const images = [
+        "{% static 'images/hero1.jpg' %}",
+        "{% static 'images/hero2.jpg' %}"
+        
+    ];
+
+    let index = 0;
+    const heroImg = document.getElementById("hero-img");
+
+    setInterval(() => {
+        index = (index + 1) % images.length;
+
+        heroImg.style.opacity = 0;
+
+        setTimeout(() => {
+            heroImg.src = images[index];
+            heroImg.style.opacity = 1;
+        }, 300);
+
+    }, 3000);
+
+});
+</script>
+
+{% endblock %}

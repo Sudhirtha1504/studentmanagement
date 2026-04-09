@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EduManage</title>
+
+    <!-- BASE CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'footer.html' %}
+
+    <!-- ================= AUTH MODAL ================= -->
+    <div id="authModal" class="auth-modal">
+
+        <div class="auth-box">
+
+            <!-- CLOSE -->
+            <span class="close-btn" onclick="closeModal()">×</span>
+
+            <!-- LOGIN -->
+            <div id="loginForm">
+
+                <h2>Register Free !</h2>
+
+                <input type="email" placeholder="Email" id="email">
+                <input type="password" placeholder="Password" id="password">
+
+                <button class="primary-btn" onclick="loginUser()">Login</button>
+
+                <p class="small-text">Forget your password?</p>
+
+                <div class="divider">Sign Up Using</div>
+
+                <div class="socials">
+                    <span>G</span>
+                    <span>f</span>
+                    <span>📸</span>
+                    <span>🐦</span>
+                </div>
+
+                <p class="bottom-text">
+                    Don’t have an account?
+                    <span onclick="showRegister()">Create New Account</span>
+                </p>
+
+            </div>
+
+            <!-- REGISTER -->
+            <div id="registerForm" style="display:none;">
+
+                <h2>Sign Up</h2>
+
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+
+                <button class="primary-btn">Sign Up</button>
+
+                <p class="bottom-text">
+                    Already have an account?
+                    <span onclick="showLogin()">Log in</span>
+                </p>
+
+            </div>
+
+            <!-- ✅ WELCOME MESSAGE -->
+            <div id="welcomeBox" style="display:none; text-align:center;">
+
+                <h2 id="welcomeText">Welcome Student 🎉</h2>
+
+                <img src="{% static 'images/hero2.jpg' %}" alt="student" width="150">
+
+                <br><br>
+
+                <button class="primary-btn" onclick="closeModal()">Close</button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+
+        function openModal() {
+            document.getElementById("authModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("authModal").style.display = "none";
+
+            // Reset UI
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("welcomeBox").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+            document.getElementById("welcomeBox").style.display = "none";
+        }
+
+        function showLogin() {
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("welcomeBox").style.display = "none";
+        }
+
+        function loginUser() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (email !== "" && password !== "") {
+                 localStorage.setItem("username", email);
+                // Hide login form
+                document.getElementById("loginForm").style.display = "none";
+
+                // Show welcome box
+                document.getElementById("welcomeBox").style.display = "block";
+
+                // Optional: show email as username
+                document.getElementById("welcomeText").innerText = "Welcome " + email + " 🎉";
+               updateHeaderUser();
+            } else {
+                alert("Please enter email and password");
+            }
+        }
+        function updateHeaderUser() {
+    const user = localStorage.getItem("username");
+
+    if (user) {
+        document.getElementById("userText").innerText = user;
+    } else {
+        document.getElementById("userText").innerText = "Register Free";
+    }
+}
+
+function handleUserClick() {
+    const user = localStorage.getItem("username");
+
+    if (user) {
+        // Logout if already logged in
+        if (confirm("Do you want to logout?")) {
+            localStorage.removeItem("username");
+            updateHeaderUser();
+        }
+    } else {
+        // Open login modal
+        openModal();
+    }
+}
+
+// Run on page load
+window.onload = function () {
+    updateHeaderUser();
+}
+
+    </script>
+
+</body>
+</html>

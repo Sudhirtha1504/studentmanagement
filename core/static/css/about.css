@@ -1,0 +1,68 @@
+/* ================= ROOT ================= */
+:root {
+    --primary: #1e5eff;
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #222;
+    --subtext: #777;
+    --radius: 16px;
+}
+
+/* ================= SECTION ================= */
+.about {
+    padding: 50px 40px;
+    background: var(--bg);
+}
+
+/* TITLE */
+.about-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+/* ================= CONTAINER ================= */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* IMAGE */
+.about-image img {
+    width: 320px;
+    border-radius: var(--radius);
+}
+
+/* CONTENT */
+.about-content {
+    flex: 1;
+}
+
+.about-content p {
+    color: var(--subtext);
+    line-height: 1.6;
+}
+
+.about-content h3 {
+    margin-top: 20px;
+    color: var(--primary);
+}
+
+/* ================= CARDS (MISSION/VISION LOOK) ================= */
+.about-content h3 + p {
+    margin-top: 8px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image img {
+        width: 100%;
+    }
+}

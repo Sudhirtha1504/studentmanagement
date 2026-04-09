@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/event.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="event-page">
+
+    <div class="event-container">
+
+        <!-- LEFT : EVENTS -->
+        <div class="event-left">
+
+            <div class="event-grid">
+                {% for event in events %}
+                <div class="event-card">
+
+                    <img src="{{ event.image.url }}">
+
+                    <div class="event-content">
+                        <h3>{{ event.title }}</h3>
+
+                        <p class="event-date">
+                            {{ event.date }}
+                        </p>
+
+                        <p class="event-time">
+                            {{ event.start_time }} - {{ event.end_time }}
+                        </p>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <!-- RIGHT : CALENDAR -->
+        <div class="event-right">
+
+            <div class="calendar-card">
+
+                <!-- HEADER -->
+                <div class="calendar-header">
+                    <button>&lt;</button>
+                    <h3>{{ current_month }}</h3>
+                    <button>&gt;</button>
+                </div>
+
+                <!-- DAYS -->
+                <div class="calendar-days">
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                </div>
+
+                <!-- DATES -->
+                <div class="calendar-dates">
+                    {% for day in calendar_days %}
+                    <div class="date {% if day.active %}active{% endif %}">
+                        {{ day.day }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="view-btn">View All Events</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

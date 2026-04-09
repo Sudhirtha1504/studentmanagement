@@ -1,0 +1,180 @@
+/* ================= ROOT ================= */
+:root {
+    --primary: #1e5eff;
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #222;
+    --subtext: #777;
+    --radius: 16px;
+}
+
+/* ================= LAYOUT ================= */
+.dashboard-container {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    background: var(--bg);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    flex-shrink: 0;
+}
+
+/* MAIN */
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ================= TYPOGRAPHY ================= */
+body {
+    font-size: 14px;
+    color: var(--text);
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ================= DAYS ================= */
+.days-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+.day-card {
+    background: var(--card);
+    padding: 16px;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 100px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.day-card:hover {
+    transform: translateY(-4px);
+}
+
+.day-card.active {
+    background: var(--primary);
+    color: white;
+}
+
+.day-card p {
+    font-size: 12px;
+    color: var(--subtext);
+}
+
+/* ================= HEADER ================= */
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #e9ecf3;
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+}
+
+.schedule-right {
+    text-align: right;
+}
+
+.calendar-select {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* ================= GRID ================= */
+.sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+/* ================= SESSION CARD ================= */
+.session-card {
+    background: var(--card);
+    padding: 18px;
+    border-radius: var(--radius);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.session-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.time {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.mentor {
+    color: var(--subtext);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* ================= AVATARS ================= */
+.avatars {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.avatars img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-left: -8px;
+    border: 2px solid white;
+}
+
+.avatars span {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+    .sessions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .sessions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

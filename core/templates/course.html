@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/course.css' %}">
+<section class="dashboard">
+
+    <!-- SIDEBAR -->
+    {% include 'sidebar.html' %}
+
+    <div class="dashboard-main">
+
+        <!-- TOP -->
+        <div class="dashboard-top">
+            <div>
+                <h2>My Learnings</h2>
+                <p>Here's what's happening with your studies today.</p>
+            </div>
+
+            <input class="search-box" type="text" placeholder="Search Information">
+        </div>
+
+        <!-- STATS -->
+        <div class="course-stats">
+
+            <div class="stat-card">
+                <p>In Progress</p>
+                <h2>{{ courses|length }} Courses</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Completed</p>
+                <h2>{{ completed_count }} Courses</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Certificates</p>
+                <h2>{{ certificates }} Earned</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Hours Spent</p>
+                <h2>{{ hours_spent }}</h2>
+            </div>
+
+        </div>
+
+        <!-- CONTINUE LEARNING -->
+        {% if courses %}
+        <div class="continue-learning">
+
+            <div class="cl-left">
+                <img src="{{ courses.0.image.url }}">
+            </div>
+
+            <div class="cl-right">
+
+                <span class="tag">{{ courses.0.category }}</span>
+
+                <h3>{{ courses.0.title }}</h3>
+
+                <p>
+                    Continue your learning journey and complete remaining modules.
+                </p>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{ courses.0.progress }}%"></div>
+                    <span>{{ courses.0.progress }}%</span>
+                </div>
+
+            </div>
+
+        </div>
+        {% endif %}
+
+        <!-- FILTER -->
+        <div class="filter-bar">
+            <a href="?"><button class="{% if not request.GET.status %}active{% endif %}">All</button></a>
+            <a href="?status=Active"><button {% if request.GET.status == "Active" %}class="active"{% endif %}>Active</button></a>
+            <a href="?status=Completed"><button {% if request.GET.status == "Completed" %}class="active"{% endif %}>Completed</button></a>
+        </div>
+
+        <!-- COURSE GRID -->
+        <div class="course-grid">
+
+            {% for course in courses %}
+            <div class="course-card">
+
+                <!-- IMAGE -->
+                <img src="{{ course.image.url }}">
+
+                <!-- CATEGORY -->
+                <span class="category">{{ course.category }}</span>
+
+                <!-- TITLE -->
+                <h3>{{ course.title }}</h3>
+
+                <!-- INSTRUCTOR -->
+                <div class="teacher">
+                    <img src="{% static 'images/user.jpg' %}">
+                    <p>{{ course.instructor }}</p>
+                </div>
+
+                <!-- PROGRESS -->
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{ course.progress }}%"></div>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="course-footer">
+                    <span>{{ course.progress }}% Complete</span>
+                    <span>{{ course.lessons_completed }}/{{ course.total_lessons }} Lessons</span>
+                </div>
+
+            </div>
+            {% empty %}
+                <p>No courses available</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

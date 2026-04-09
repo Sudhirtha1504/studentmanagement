@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/session.css' %}">
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Top Days Row -->
+        <div class="days-row">
+            {% for day in days %}
+            <div class="day-card {% if day.active %}active{% endif %}">
+                <h4>{{ day.name }}</h4>
+                <p>{{ day.date }}</p>
+                <h2>{{ day.day_number }}</h2>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Schedule Header -->
+        <div class="schedule-header">
+            <div>
+                <h2>Schedule</h2>
+                <p>{{ today_date }}</p>
+                <span class="today">Today</span>
+            </div>
+
+            <div class="schedule-right">
+                <h2>{{ current_day }}</h2>
+                <p>{{ sessions.count }} Sessions</p>
+
+                <select class="calendar-select">
+                    <option>2024 - 2025</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sessions Grid -->
+        <div class="sessions-grid">
+            {% for session in sessions %}
+            <div class="session-card">
+
+                <p class="time">
+                    {{ session.start_time }} - {{ session.end_time }}
+                </p>
+
+                <h3>{{ session.title }}</h3>
+
+                <p class="mentor">
+                    {{ session.description }}
+                </p>
+
+                <!-- Participants -->
+                <div class="avatars">
+                    {% for img in session.participants.all|slice:":3" %}
+                    <img src="{{ img.image.url }}">
+                    {% endfor %}
+                    <span>+2</span>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

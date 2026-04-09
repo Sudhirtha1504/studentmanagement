@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="sidebar">
+
+    <h2 class="logo-text">Edu Track</h2>
+
+    <ul>
+        <li class="active"><a href="{% url 'dashboard' %}">🏠 Dashboard</a></li>
+        <li><a href="{% url 'course' %}">📚 My Courses</a></li>
+        <li><a href="{% url 'sessions' %}">📅 Schedule</a></li>
+        <li><a href="{%url 'attendance'%}">📊 Attendance</a></li>
+        <li>📝 Assignments</li>
+        <li>💰 Finance Details</li>
+        <li>📘 Exam and Grades</li>
+    </ul>
+
+    <!-- USER -->
+    <div class="sidebar-user">
+        <img src="{% static 'images/user.jpg' %}" width="70px">
+        <h4>Mikejohn</h4>
+        <p>mike@gmail.com</p>
+
+        <button class="logout-btn"><a href="{%url 'home' %}">Logout</a></button>
+    </div>
+
+</div>
